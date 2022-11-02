@@ -53,20 +53,33 @@ def postOrderTraversal(root):
     print(root.data, end  = " ")
 
 # level order traversal / Breadth first search traversal
-def levelOrderTraversal(rootNode):
-    if not rootNode:
+# def levelOrderTraversal(rootNode):
+#     if not rootNode:
+#         return
+#     else:
+#         customeQueue = queue.Queue()
+#         customeQueue.enqueue(rootNode)
+
+#         while not (customeQueue.isQueueEmpty()):
+#             root = customeQueue.dequeue()
+#             print(root.data.data, end = " ")
+#             if root.data.leftChild is not None:
+#                 customeQueue.enqueue(root.data.leftChild)
+#             if root.data.rightChild is not None:
+#                 customeQueue.enqueue(root.data.rightChild)
+
+# breadth first search traversal Using recursion
+def levelOrderTraversal(customQueue):
+    if customQueue.isQueueEmpty():
         return
     else:
-        customeQueue = queue.Queue()
-        customeQueue.enqueue(rootNode)
-
-        while not (customeQueue.isQueueEmpty()):
-            root = customeQueue.dequeue()
-            print(root.data.data, end = " ")
-            if root.data.leftChild is not None:
-                customeQueue.enqueue(root.data.leftChild)
-            if root.data.rightChild is not None:
-                customeQueue.enqueue(root.data.rightChild)
+        root = customQueue.dequeue()
+        print(root.data.data, end = " ")
+        if root.data.leftChild is not None:
+            customQueue.enqueue(root.data.leftChild)
+        if root.data.rightChild is not None:
+            customQueue.enqueue(root.data.rightChild)
+        levelOrderTraversal(customQueue)
 
 
 # inserting the new node to the vacant place  before sorting:
@@ -172,18 +185,22 @@ inOrderTraversal(tree)
 print()
 postOrderTraversal(tree)
 print()
-levelOrderTraversal(tree)
-print()
+# levelOrderTraversal(tree)
+# print()
 
 # creating a new node for insertion
 noSugarCola = TreeNode("No Sugar Cola")
 insertNewNode(tree,noSugarCola)
 
-levelOrderTraversal(tree)
-print()
+# levelOrderTraversal(tree)
+# print()
 
 deleteNode(tree,"Hot")
-levelOrderTraversal(tree)
+
+# for recursive level order traversal
+customQueue = queue.Queue()
+customQueue.enqueue(tree)
+levelOrderTraversal(customQueue)
 print()
 
 deleteBT(tree)
