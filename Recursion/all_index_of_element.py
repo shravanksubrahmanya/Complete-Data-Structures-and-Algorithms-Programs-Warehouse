@@ -15,9 +15,21 @@ def printAllIndicesOfElement(li, e, index = 0):
         print(index)
     return printAllIndicesOfElement(li, e, index + 1) 
 
+def returnAllIndicesInList(li, e, index = 0):
+    if index == len(li):
+        return []
+    
+    smalllist = returnAllIndicesInList(li, e, index + 1)
+    
+    if li[index] == e:
+        smalllist.insert(0, index)
+    return smalllist
+
 
 li = [2,5,2,8,2,1,3,6,2]
 ele = 2
 
-res = printAllIndicesOfElement(li, ele)
+printAllIndicesOfElement(li, ele)
+
+res = returnAllIndicesInList(li, ele)
 print(res)
