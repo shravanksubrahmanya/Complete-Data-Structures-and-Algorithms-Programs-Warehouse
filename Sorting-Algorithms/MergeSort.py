@@ -90,3 +90,46 @@ array = [43,98,1,42,0,32,73,67,23,32,65,72,11,19,18]
 print(array)
 print(MergeSort(array,0,len(array)-1))
 print(array)
+
+
+'''Alternate method'''
+
+
+def merge_array(li, s, m, e):
+  l1 = li[:m+1]
+  l2 = li[m+1:]
+  
+  i = 0
+  j = 0
+  k = 0
+  
+  while i < len(l1) and j < len(l2):
+    if l1[i] <= l2[j]:
+      li[k] = l1[i]
+      i += 1
+    else:
+      li[k] = l2[j]
+      j += 1
+    k += 1
+
+  while i < len(l1):
+    li[k] = l1[i]
+    i += 1
+    k += 1
+  
+  while j < len(l2):
+    li[k] = l2[j]
+    j += 1
+    k += 1
+
+def merge_sort(li, s, e):
+  if s < e:
+    mid = s + (e - s) // 2
+    
+    merge_sort(li, s, mid)
+    merge_sort(li, mid + 1, e)
+    merge_array(li, s, mid, e)
+  
+li = [4,1,2,7,2,9,5,8,1,4]
+merge_sort(li, 0, len(li)-1)
+print(li)
